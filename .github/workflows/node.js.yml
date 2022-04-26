@@ -11,14 +11,11 @@ jobs:
     steps:
       - name: Set up SSH
         run: |
-          mkdir -p ~/.ssh/
           echo "$SSH_PRIVATE_KEY" > ./deploy.key
           sudo chmod 600 ./deploy.key
-          echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
         shell: bash
         env:
           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
-          SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
       - name: Checkout Code
         uses: actions/checkout@v2
         with:
@@ -34,4 +31,4 @@ jobs:
         run: |
           npm run build
       - name: Push to server
-        run: ssh -i deploy.key root@174.138.5.242 "/usr/bin/pm2 restart demo-mongo"
+        run: ssh cd "/root/.ssh/deploy.key" root@174.138.5.242 "/usr/bin/pm2 restart demo-mongo"
