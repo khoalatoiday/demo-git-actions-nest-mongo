@@ -33,6 +33,10 @@ jobs:
       - name: Build
         run: |
           npm run build
-      - name: Restart pm2
-        run: |
-          ssh -p22 root@174.138.5.242 "VChain@2020@Vdt" "/usr/local/bin/pm2 restart demo-mongo"
+      - name: Push to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: http://174.138.5.242
+          username: 
+          password:
+          script:  pm2 restart demo-mongo
