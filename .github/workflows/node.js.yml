@@ -39,4 +39,4 @@ jobs:
           host: http://174.138.5.242
           username: 
           password:
-          script:  pm2 restart demo-mongo
+          script: cd /root/deploy.key  && pm2 restart demo-mongo
