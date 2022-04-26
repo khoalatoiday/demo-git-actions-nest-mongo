@@ -1,7 +1,7 @@
 name: CI
 on:
   push:
-    branches: [main]
+    branches: [${{secrets.GIT_BRANCH_NAME}}]
 jobs:
   # This workflow contains a single job called "build"
   build:
@@ -16,7 +16,7 @@ jobs:
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
         with:
-          node-version: 15
+          node-version: ${{secrets.NODE_VERSION}}
       - name: Install Dependencies
         run: |
           npm ci
@@ -26,12 +26,11 @@ jobs:
       - name: Push to server
         uses: appleboy/ssh-action@master
         with:
-          host: 174.138.5.242
-          username: root
+          host: ${{secrets.SERVER_IP}}
+          username: ${{secrets.SSH_USERNAME}}
+          password: ${{secrets.SSH_PASSWORD}}
           key: ${{secrets.SSH_PRIVATE_KEY}}
-          port: 22
-          script: 
-            cd /home/demo-git-actions-nest-mongo &&
-            git pull &&
-            /usr/local/bin/pm2 restart demo-mongo
-
+          port: ${{secrets.SSH_PORT}}
+          script: cd ${{secrets.PROJECT_FOLDER}} && 
+            git pull https://${{secrets.GIT_ACCOUNT_USERNAME}}:${{secrets.GIT_ACCOUNT_PASSWORD}}@${{secrets.GIT_URL}} ${{secrets.GIT_BRANCH_NAME}}&&
+            npm run build && /usr/local/bin/pm2 restart ${{secrets.PM2_APP_NAME}}
