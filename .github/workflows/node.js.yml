@@ -9,6 +9,16 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_PRIVATE_KEY" > ./deploy.key
+          sudo chmod 600 ./deploy.key
+          echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
+          SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
       - name: Checkout Code
         uses: actions/checkout@v2
         with:
@@ -25,4 +35,4 @@ jobs:
           npm run build
       - name: Restart pm2
         run: |
-          ssh -p22 root@174.138.5.242 "/root/authorzied_keys" "/usr/local/bin/pm2 restart demo-mongo"
+          ssh -p22 root@174.138.5.242 "VChain@2020@Vdt" "/usr/local/bin/pm2 restart demo-mongo"
