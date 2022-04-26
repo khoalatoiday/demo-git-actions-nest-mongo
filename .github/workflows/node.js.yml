@@ -12,7 +12,7 @@ jobs:
       - name: check ssh
         uses: appleboy/ssh-action@master
         with:
-          host: http://174.138.5.242
+          host: 174.138.5.242
           username:
           key: ${{ secrets.KEY_SECRET }}
           port: 22
