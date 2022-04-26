@@ -30,5 +30,8 @@ jobs:
           username: root
           key: ${{secrets.SSH_PRIVATE_KEY}}
           port: 22
-          script: "/usr/local/bin/pm2 restart demo-mongo"
+          script: 
+            cd /root/home/demo-git-actions-nest-mongo
+            git pull origin master
+            "/usr/local/bin/pm2 restart demo-mongo"
 
