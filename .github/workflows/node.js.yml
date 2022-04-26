@@ -9,13 +9,6 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: check ssh
-        uses: appleboy/ssh-action@master
-        with:
-          host: 174.138.5.242
-          username:
-          key: ${{ secrets.KEY_SECRET }}
-          port: 22
       - name: Checkout Code
         uses: actions/checkout@v2
         with:
