@@ -34,9 +34,4 @@ jobs:
         run: |
           npm run build
       - name: Push to server
-        uses: appleboy/ssh-action@master
-        with:
-          host: http://174.138.5.242
-          username: 
-          password:
-          script: cd /root/deploy.key  && pm2 restart demo-mongo
+        run: ssh -i ${{secrets.SSH_PRIVATE_KEY}} root@174.138.5.242 "/usr/bin/pm2 restart demo-mongo"
