@@ -15,6 +15,6 @@ export class AppService {
   }
 
   getUser(): any {
-    return this.UserEntity.find({}).limit(2);
+    return this.UserEntity.find({}).limit(1);
   }
 }
