@@ -1,7 +1,7 @@
 name: CI
 on:
   push:
-    branches: [${{secrets.GIT_BRANCH_NAME}}]
+    branches: [`${{secrets.GIT_BRANCH_NAME}}`]
 jobs:
   # This workflow contains a single job called "build"
   build:
