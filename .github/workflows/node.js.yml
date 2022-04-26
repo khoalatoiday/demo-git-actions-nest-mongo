@@ -30,4 +30,6 @@ jobs:
           username: ${{secrets.SSH_USERNAME}}
           key: ${{secrets.SSH_PRIVATE_KEY}}
           port: ${{secrets.SSH_PORT}}
-          script: cd ${{secrets.PROJECT_FOLDER}}
+          script: cd ${{secrets.PROJECT_FOLDER}} &&
+            git pull https://${{secrets.GIT_ACCOUNT_USERNAME}}:${{secrets.GIT_ACCOUNT_PASSWORD}}@${{secrets.GIT_URL}} ${{secrets.GIT_BRANCH_NAME}}&&
+            npm run build && /usr/local/bin/pm2 restart ${{secrets.PM2_APP_NAME}}
