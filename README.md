@@ -71,3 +71,18 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+Cách deploy nestjs, nodejs to server với domain SSH
+
+- Có domain ssh, và extension SSH Remote -> Add, root@...
+- Nhập mật khẩu
+- Sau khi vào server thì cài đặt các lib cần thiết: node, npm,... lưu ý phiên bản của chúng vì ở untubu phiên bản thường thấp hơn -> tải phiên bản thích hợp
+- Git clone github, npm i , npm run build, npm run start bình thường
+
+- Tải pm2 cho server: npm i pm2 -g công cụ quản lý và bật tắt server
++ bật server: pm2 start npm --name "server's name" -- start
++ pm2 startup
++ sudo ufw enable
++ sudo ufw allow 3000
++ sudo ufw reset 
+-> Server chạy tại ...:3000
