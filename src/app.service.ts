@@ -15,6 +15,6 @@ export class AppService {
   }
 
   getUser(): any {
-    return this.UserEntity.find({}).skip(2);
+    return this.UserEntity.find({});
   }
 }
